@@ -1,21 +1,33 @@
-def translate(mots)
-	if mots[0] == 'a' || mots[0] == 'o' || mots[0] == 'i' || mots[0] == 'e' || mots[0] == 'u' 
-		return mots + 'ay'	
-	end
-		a = 0
-		b = 0
-		c = 0 
-		for i in 0..mots.length-2 do
-			if mots[i] == 'c'
-				if mots[i+1] == 'h' 
-					a = mots[i]
-					b = mots[i+1]
-					
-				end
-			end
-			c = mots.delete( a)
-		end	
-		return c + a + b + 'ay'
-		return mots.reverse + 'ay'
-		
+def trans(s)
+    i=0
+    s.each_char do |n|
+        b = (n =="a" || n == "o" || n == "i" || n == "e" || n == "y")
+        if (b)
+              s = s+"ay"
+              break
+        else
+            while (s[i]!="a" and s[i]!="o" and s[i]!="i" and s[i]!="e" and s[i]!="y")
+                   i += 1
+               end
+               c = s.slice!(0..i-1)
+               s = s+c+"ay"
+               break
+        end
+    end
+    return s
+end
+def translate(s)
+    pi = 0
+    s = s.scan(/\w+/)
+    solv = ""
+    s.each do |l|
+        if (pi==0)
+            solv = trans(l)
+        else
+            solv = solv + " " + trans(l)    
+        end
+        pi += 1
+        
+    end
+    return solv
 end
